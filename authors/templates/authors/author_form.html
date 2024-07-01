@@ -2,15 +2,61 @@
 <html lang="br">
 <head>
     <meta charset="UTF-8">
-    <title>{% if form.instance.pk %}Editar Autor{% else %}Adicionar Autor{% endif %}</title>
+    <title>Formulário de Autor</title>
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+    </style>
+    <script>
+        // Função para formatar o CPF automaticamente
+        function formatarCPF(cpf) {
+            cpf = cpf.replace(/\D/g, ''); // Remove tudo que não é dígito
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca ponto entre o terceiro e o quarto dígitos
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca ponto entre o sexto e o sétimo dígitos
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca hífen entre o nono e o décimo dígitos
+            return cpf;
+        }
+
+
+        function mascararCPF(event) {
+            var input = event.target;
+            input.value = formatarCPF(input.value);
+        }
+    </script>
 </head>
 <body>
-    <h1>{% if form.instance.pk %}Editar Autor{% else %}Adicionar Autor{% endif %}</h1>
+    <h1>Formulário de Autor</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            {{ form.nome.label_tag }}
+            {{ form.nome }}
+        </div>
+        <div class="form-group">
+            {{ form.sobrenome.label_tag }}
+            {{ form.sobrenome }}
+        </div>
+        <div class="form-group">
+            {{ form.data_nascimento.label_tag }}
+            {{ form.data_nascimento }}
+        </div>
+        <div class="form-group">
+            {{ form.cpf.label_tag }}
+            {{ form.cpf }}
+        </div>
         <button type="submit">Salvar</button>
     </form>
     <a href="{% url 'author_list' %}">Cancelar</a>
+
+    <script>
+        // Aplica a formatação ao carregar a página, se necessário
+        var cpfInput = document.getElementById('id_cpf');
+
+        // Ajuste o ID conforme necessário
+        if (cpfInput)
+            cpfInput.addEventListener('input', mascararCPF);
+
+    </script>
 </body>
 </html>
