@@ -1,9 +1,9 @@
-from django.urls import include
-from django.urls import path
+# EditoraLivro/urls.py
+
 from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('authors.urls')),  # Inclui as URLs do aplicativo authors
-    # outras URLs do projeto, se houver
+    path('', include('authors.urls')),  # Inclui URLs do app 'authors'
 ]

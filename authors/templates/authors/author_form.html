@@ -1,23 +1,21 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Formulário de Autor</title>
+    <title>{% if form.instance.pk %}Editar Autor{% else %}Adicionar Autor{% endif %}</title>
     <style>
         .form-group {
             margin-bottom: 1rem;
         }
     </style>
     <script>
-        // Função para formatar o CPF automaticamente
         function formatarCPF(cpf) {
-            cpf = cpf.replace(/\D/g, ''); // Remove tudo que não é dígito
-            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca ponto entre o terceiro e o quarto dígitos
-            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca ponto entre o sexto e o sétimo dígitos
-            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca hífen entre o nono e o décimo dígitos
+            cpf = cpf.replace(/\D/g, '');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
             return cpf;
         }
-
 
         function mascararCPF(event) {
             var input = event.target;
@@ -26,7 +24,7 @@
     </script>
 </head>
 <body>
-    <h1>Formulário de Autor</h1>
+    <h1>{% if form.instance.pk %}Editar Autor{% else %}Adicionar Autor{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
         <div class="form-group">
@@ -50,13 +48,10 @@
     <a href="{% url 'author_list' %}">Cancelar</a>
 
     <script>
-        // Aplica a formatação ao carregar a página, se necessário
         var cpfInput = document.getElementById('id_cpf');
-
-        // Ajuste o ID conforme necessário
-        if (cpfInput)
+        if (cpfInput) {
             cpfInput.addEventListener('input', mascararCPF);
-
+        }
     </script>
 </body>
 </html>

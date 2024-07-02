@@ -1,4 +1,5 @@
-
+# authors/models.py
+from django.core.validators import RegexValidator
 from django.db import models
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
@@ -19,9 +20,11 @@ def validate_cpf(value):
             code='invalid_cpf_length',
         )
 
-    # Validação do dígito verificador do CPF
-    cpf = [int(digit) for digit in cpf]
-    if (sum(cpf[:9]) * 10 % 11) % 10 != cpf[9] or (sum(cpf[:10]) * 10 % 11) % 10 != cpf[10]:
+    def calc_digit(digits):
+        s = sum(int(digit) * ((len(digits) + 1 - idx) % 10 + 1) for idx, digit in enumerate(digits))
+        return (s * 10) % 11 % 10
+
+    if calc_digit(cpf[:9]) != int(cpf[9]) or calc_digit(cpf[:10]) != int(cpf[10]):
         raise ValidationError(
             _('CPF inválido'),
             code='invalid_cpf',
@@ -30,11 +33,8 @@ def validate_cpf(value):
 class Author(models.Model):
     nome = models.CharField(max_length=100)
     sobrenome = models.CharField(max_length=100)
+    cpf = models.CharField(max_length=14, validators=[RegexValidator(regex=r'^\d{3}\.\d{3}\.\d{3}-\d{2}$', message="CPF deve estar no formato xxx.xxx.xxx-xx")])
     data_nascimento = models.DateField()
-    cpf = models.CharField(max_length=14, unique=True, validators=[validate_cpf], verbose_name='CPF')
 
     def __str__(self):
-        return f'{self.nome} {self.sobrenome}'
-
-    class Meta:
-        app_label = 'authors'
+        return f"{self.nome} {self.sobrenome}"
