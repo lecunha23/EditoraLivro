@@ -1,33 +1,18 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Formulário de Autor</title>
+    <title>{% if form.instance.pk %}Editar Autor{% else %}Adicionar Autor{% endif %}</title>
     <style>
         .form-group {
             margin-bottom: 1rem;
         }
     </style>
-    <script>
-        // Função para formatar o CPF automaticamente
-        function formatarCPF(cpf) {
-            cpf = cpf.replace(/\D/g, ''); // Remove tudo que não é dígito
-            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca ponto entre o terceiro e o quarto dígitos
-            cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Coloca ponto entre o sexto e o sétimo dígitos
-            cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca hífen entre o nono e o décimo dígitos
-            return cpf;
-        }
-
-
-        function mascararCPF(event) {
-            var input = event.target;
-            input.value = formatarCPF(input.value);
-        }
-    </script>
 </head>
 <body>
-    <h1>Formulário de Autor</h1>
-    <form method="post">
+    <h1>{% if form.instance.pk %}Editar Autor{% else %}Adicionar Autor{% endif %}</h1>
+
+    <form id="authorForm" method="post" action="{% url 'author_create' %}" target="_blank">
         {% csrf_token %}
         <div class="form-group">
             {{ form.nome.label_tag }}
@@ -45,18 +30,20 @@
             {{ form.cpf.label_tag }}
             {{ form.cpf }}
         </div>
-        <button type="submit">Salvar</button>
+        <button type="button" onclick="submitFormAndOpenWindow()">Salvar</button>
     </form>
     <a href="{% url 'author_list' %}">Cancelar</a>
 
     <script>
-        // Aplica a formatação ao carregar a página, se necessário
-        var cpfInput = document.getElementById('id_cpf');
-
-        // Ajuste o ID conforme necessário
-        if (cpfInput)
-            cpfInput.addEventListener('input', mascararCPF);
-
+        // Função para enviar o formulário e abrir uma nova janela
+        function submitFormAndOpenWindow() {
+            var form = document.getElementById('authorForm');
+            form.submit();
+            setTimeout(function() {
+                console.log('Abrindo nova janela');
+                window.open('{% url 'author_list' %}', '_blank');
+            }, 1000); // Ajuste o tempo de espera conforme necessário
+        }
     </script>
 </body>
 </html>
