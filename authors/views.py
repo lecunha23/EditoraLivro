@@ -1,8 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib import messages
-from .forms import AuthorForm
 from .models import Author
 import logging
+from django.shortcuts import render, redirect
+from .forms import AuthorForm
+from django.contrib import messages
 
 logger = logging.getLogger(__name__)
 
