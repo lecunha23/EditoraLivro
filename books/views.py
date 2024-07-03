@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import LivroForm
+from .models import Livro
 
 def livro_create(request):
     if request.method == 'POST':
@@ -10,3 +11,7 @@ def livro_create(request):
     else:
         form = LivroForm()
     return render(request, 'books/livro_form.html', {'form': form})
+
+def livro_list(request):
+    livros = Livro.objects.all()
+    return render(request, 'books/livro_list.html', {'livros': livros})
