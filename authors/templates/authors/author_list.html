@@ -2,21 +2,62 @@
 <html lang="br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Autores</title>
+    <title>Autores</title>
+    <!-- Adicione o link para o Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .author-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .author-list li {
+            margin-bottom: 10px;
+        }
+        .author-actions {
+            margin-top: 20px;
+        }
+        .author-actions .btn-group {
+            margin-right: 10px;
+        }
+        .author-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
-    <h1>Autores</h1>
-    <a href="{% url 'author_create' %}">Adicionar Autor</a>
-    <ul>
-        {% for author in authors %}
-            <li>
-                <a href="{% url 'author_detail' author.pk %}">
-                    {{ author.nome }} {{ author.sobrenome }}
-                </a>
-                (<a href="{% url 'author_update' author.pk %}">Editar</a>)
-                (<a href="{% url 'author_delete' author.pk %}">Deletar</a>)
-            </li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>Autores</h1>
+
+        <ul class="author-list">
+            {% for author in authors %}
+                <li class="author-info">
+                    <div>
+                        {{ author.nome }} {{ author.sobrenome }}
+                    </div>
+                    <div>
+                        <a href="{% url 'author_update' author.pk %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'author_delete' author.pk %}" class="btn btn-danger">Deletar</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="author-actions">
+            <div class="row">
+                <div class="col-md-6">
+                    <a href="{% url 'author_create' %}" class="btn btn-success">Adicionar Autor</a>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicione o link para o Bootstrap JS e o jQuery (opcional) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
