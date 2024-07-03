@@ -1,16 +1,37 @@
+<!-- templates/books/form.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Adicionar Livro</title>
+    <title>{% if form.instance.pk %}Editar Livro{% else %}Adicionar Livro{% endif %}</title>
+    <style>
+        .form-group {
+            margin-bottom: 1rem;
+        }
+    </style>
 </head>
 <body>
-    <h1>Adicionar Livro</h1>
+    <h1>{% if form.instance.pk %}Editar Livro{% else %}Adicionar Livro{% endif %}</h1>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+            {{ form.titulo.label_tag }}
+            {{ form.titulo }}
+        </div>
+        <div class="form-group">
+            {{ form.autor.label_tag }}
+            {{ form.autor }}
+        </div>
+        <div class="form-group">
+            {{ form.isbn.label_tag }}
+            {{ form.isbn }}
+        </div>
+        <div class="form-group">
+            {{ form.data_publicacao.label_tag }}
+            {{ form.data_publicacao }}
+        </div>
         <button type="submit">Salvar</button>
     </form>
-    <a href="{% url 'livro_list' %}">Cancelar</a>  <!-- Substitua 'livro_list' pela URL correta -->
+    <a href="{% url 'livro_list' %}">Cancelar</a>
 </body>
 </html>
