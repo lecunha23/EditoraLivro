@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .book-link {
+            text-decoration: none;
+            color: #007bff;
+        }
+        .book-link:hover {
+            text-decoration: underline;
+        }
+        .actions {
+            text-align: right;
+        }
+        .button-group {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .button-group a {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: #ffffff;
+            border-radius: 4px;
+            text-decoration: none;
+        }
+        .button-group a.btn-secondary {
+            background-color: #6c757d; /* Cor cinza do Bootstrap para botão secundário */
+            color: #ffffff;
+        }
+        .button-group a.btn-secondary:hover {
+            background-color: #5a6268; /* Cor de hover para botão secundário */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Livros</h1>
+        <div class="button-group">
+            <a href="{% url 'livro_create' %}" class="btn btn-success">Adicionar Livro</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
+        </div>
+        <ul>
+            {% for livro in livros %}
+                <li>
+                    <a href="{% url 'livro_detail' livro.pk %}" class="book-link">
+                        {{ livro.titulo }}
+                    </a>
+                    <span class="actions">
+                        (<a href="{% url 'livro_update' livro.pk %}">Editar</a>)
+                        (<a href="{% url 'livro_delete' livro.pk %}">Deletar</a>)
+                    </span>
+                </li>
+            {% empty %}
+                <li>Nenhum livro encontrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -20,6 +20,10 @@ def livro_list(request):
     livros = Livro.objects.all()
     return render(request, 'books/livro_list.html', {'livros': livros})
 
+def livro_detail(request, pk):
+    livro = get_object_or_404(Livro, pk=pk)
+    return render(request, 'books/livro_detail.html', {'livro': livro})
+
 def livro_update(request, pk):
     livro = get_object_or_404(Livro, pk=pk)
     if request.method == 'POST':
