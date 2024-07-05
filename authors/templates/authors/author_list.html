@@ -35,6 +35,9 @@
             border: 1px solid #ccc;
             border-radius: 4px;
             background-color: #f9f9f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
         .author-actions {
             margin-top: 20px;
@@ -42,13 +45,14 @@
             justify-content: space-between;
             align-items: center; /* Alinha os itens verticalmente */
         }
-        .author-actions .btn-group {
-            margin-right: 20px;
-        }
         .author-info {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
+        }
+        .btn-secondary {
+            margin-left: auto;
         }
     </style>
 </head>
@@ -57,14 +61,8 @@
         <h1>Autores</h1>
 
         <div class="author-actions">
-            <div class="row w-100">
-                <div class="col-md-6">
-                    <a href="{% url 'author_create' %}" class="btn btn-success">Adicionar Autor</a>
-                </div>
-                <div class="col-md-6 text-right">
-                    <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
-                </div>
-            </div>
+            <a href="{% url 'author_create' %}" class="btn btn-success">Adicionar Autor</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
         </div>
 
         <ul class="author-list">
@@ -73,8 +71,8 @@
                     <div>
                         {{ author.nome }} {{ author.sobrenome }}
                     </div>
-                    <div class="mt-2"> <!-- Adicionei margem acima para separar os botões -->
-                        <a href="{% url 'author_update' author.pk %}" class="btn btn-primary mr-2">Editar</a> <!-- Adicionei margem à direita -->
+                    <div>
+                        <a href="{% url 'author_update' author.pk %}" class="btn btn-primary mr-2">Editar</a>
                         <a href="{% url 'author_delete' author.pk %}" class="btn btn-danger">Deletar</a>
                     </div>
                 </li>
@@ -82,7 +80,6 @@
                 <li>Nenhum autor encontrado.</li>
             {% endfor %}
         </ul>
-
     </div>
 
     <!-- Adicione o link para o Bootstrap JS e o jQuery (opcional) -->
