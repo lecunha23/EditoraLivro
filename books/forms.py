@@ -1,6 +1,6 @@
 from django import forms
 from .models import Livro
-from .validators import validar_isbn
+import re
 
 
 class LivroForm(forms.ModelForm):

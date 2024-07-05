@@ -32,6 +32,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
         }
         .book-link {
             text-decoration: none;
@@ -79,13 +83,15 @@
         <ul>
             {% for livro in livros %}
                 <li>
-                    <a href="{% url 'livro_detail' livro.pk %}" class="book-link">
-                        {{ livro.titulo }}
-                    </a>
-                    <span class="actions">
-                        (<a href="{% url 'livro_update' livro.pk %}">Editar</a>)
-                        (<a href="{% url 'livro_delete' livro.pk %}">Deletar</a>)
-                    </span>
+                    <div>
+                        <a href="{% url 'livro_detail' livro.pk %}" class="book-link">
+                            {{ livro.titulo }}
+                        </a>
+                    </div>
+                    <div class="actions">
+                        <a href="{% url 'livro_update' livro.pk %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'livro_delete' livro.pk %}" class="btn btn-danger">Deletar</a>
+                    </div>
                 </li>
             {% empty %}
                 <li>Nenhum livro encontrado.</li>
