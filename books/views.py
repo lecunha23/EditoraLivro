@@ -4,16 +4,27 @@ from .models import Livro
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.contrib import messages
+from .forms import LivroForm
 
 def livro_create(request):
     if request.method == 'POST':
         form = LivroForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Livro criado com sucesso!')
             return redirect('livro_list')
     else:
         form = LivroForm()
+    return render(request, 'books/livro_form.html', {'form': form})
+
+def livro_update(request, pk):
+    livro = get_object_or_404(Livro, pk=pk)
+    if request.method == 'POST':
+        form = LivroForm(request.POST, instance=livro)
+        if form.is_valid():
+            form.save()
+            return redirect('livro_list')
+    else:
+        form = LivroForm(instance=livro)
     return render(request, 'books/livro_form.html', {'form': form})
 
 def livro_list(request):
@@ -24,17 +35,7 @@ def livro_detail(request, pk):
     livro = get_object_or_404(Livro, pk=pk)
     return render(request, 'books/livro_detail.html', {'livro': livro})
 
-def livro_update(request, pk):
-    livro = get_object_or_404(Livro, pk=pk)
-    if request.method == 'POST':
-        form = LivroForm(request.POST, instance=livro)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Livro atualizado com sucesso!')
-            return redirect('livro_list')
-    else:
-        form = LivroForm(instance=livro)
-    return render(request, 'books/livro_form.html', {'form': form})
+
 
 
 def livro_delete(request, pk):
