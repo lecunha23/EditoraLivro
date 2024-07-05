@@ -30,20 +30,6 @@
     <div class="container">
         <h1>Autores</h1>
 
-        <ul class="author-list">
-            {% for author in authors %}
-                <li class="author-info">
-                    <div>
-                        {{ author.nome }} {{ author.sobrenome }}
-                    </div>
-                    <div>
-                        <a href="{% url 'author_update' author.pk %}" class="btn btn-primary">Editar</a>
-                        <a href="{% url 'author_delete' author.pk %}" class="btn btn-danger">Deletar</a>
-                    </div>
-                </li>
-            {% endfor %}
-        </ul>
-
         <div class="author-actions">
             <div class="row">
                 <div class="col-md-6">
@@ -54,6 +40,21 @@
                 </div>
             </div>
         </div>
+
+        <ul class="author-list">
+            {% for author in authors %}
+                <li class="author-info">
+                    <div>
+                        {{ author.nome }} {{ author.sobrenome }}
+                    </div>
+                    <div class="mt-2"> <!-- Adicionei margem acima para separar os botões -->
+                        <a href="{% url 'author_update' author.pk %}" class="btn btn-primary mr-2">Editar</a> <!-- Adicionei margem à direita -->
+                        <a href="{% url 'author_delete' author.pk %}" class="btn btn-danger">Deletar</a>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
     </div>
 
     <!-- Adicione o link para o Bootstrap JS e o jQuery (opcional) -->
