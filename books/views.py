@@ -3,7 +3,7 @@ from .forms import LivroForm
 from .models import Livro
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-from django.contrib import messages
+from .models import Livro
 from .forms import LivroForm
 
 def livro_create(request):

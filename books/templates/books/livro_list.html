@@ -87,6 +87,8 @@
                         <a href="{% url 'livro_detail' livro.pk %}" class="book-link">
                             {{ livro.titulo }}
                         </a>
+                        <br>
+                        <small>Data de Publicação: {{ livro.data_publicacao }}</small> <!-- Exibir data de publicação -->
                     </div>
                     <div class="actions">
                         <a href="{% url 'livro_update' livro.pk %}" class="btn btn-primary">Editar</a>
