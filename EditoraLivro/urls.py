@@ -7,6 +7,6 @@ urlpatterns = [
     path('', views.home, name='home'),  # Rota para a URL raiz
     path('author/', include('authors.urls')),
     path('books/', include('books.urls')),
-
+    path('fornecedores/', include('fornecedores.urls')),
 
 ]
