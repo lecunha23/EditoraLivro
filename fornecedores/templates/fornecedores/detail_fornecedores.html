@@ -12,7 +12,10 @@
     <p><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</p>
     <p><strong>Telefone:</strong> {{ fornecedor.telefone }}</p>
     <p><strong>Email:</strong> {{ fornecedor.email }}</p>
-    <p><strong>Endereço:</strong> {{ fornecedor.endereco }}</p>
+    <p><strong>Endereço:</strong> {{fornecedor.endereco }}</p>
+    <p><strong>Bairro:</strong> {{ fornecedor.bairro }}</p>
+    <p><strong>CEP:</strong> {{ fornecedor.cep }}</p>
+    <p><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
     <a href="{% url 'lista_fornecedores' %}">Voltar para a Lista</a>
 </body>
 </html>
