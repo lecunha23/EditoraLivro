@@ -1,6 +1,8 @@
 
 
 from django.db import models
+from .utils import validar_cnpj
+from django.core.exceptions import ValidationError
 
 class Fornecedor(models.Model):
     nome = models.CharField(max_length=255)
@@ -14,3 +16,7 @@ class Fornecedor(models.Model):
 
     def __str__(self):
         return self.nome
+
+    def clean(self):
+        if not validar_cnpj(self.cnpj):
+            raise ValidationError({'cnpj': 'CNPJ inválido.'})

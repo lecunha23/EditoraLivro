@@ -1,0 +1,23 @@
+<!-- fornecedores/templates/fornecedores/lista_fornecedores.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Fornecedores</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Lista de Fornecedores</h2>
+        <ul class="list-group">
+            {% for fornecedor in fornecedores %}
+                <li class="list-group-item">{{ fornecedor.nome }} - {{ fornecedor.cnpj }}</li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'adicionar_fornecedor' %}" class="btn btn-primary mt-3">Adicionar Fornecedor</a>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
