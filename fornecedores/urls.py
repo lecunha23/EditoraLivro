@@ -1,10 +1,13 @@
 
 
 from django.urls import path
-from .views import adicionar_fornecedor, lista_fornecedores, detalhe_fornecedor
+from . import views
 
 urlpatterns = [
-    path('', lista_fornecedores, name='lista_fornecedores'),
-    path('<int:pk>/', detalhe_fornecedor, name='detalhe_fornecedor'),
-    path('adicionar/', adicionar_fornecedor, name='adicionar_fornecedor'),
+    path('', views.lista_fornecedores, name='lista_fornecedores'),
+    path('<int:pk>/', views.detalhe_fornecedor, name='detalhe_fornecedor'),
+    path('adicionar/', views.adicionar_fornecedor, name='adicionar_fornecedor'),
+    path('<int:pk>/editar/', views.editar_fornecedor, name='editar_fornecedor'),  # Nova URL para edição
+    path('<int:pk>/deletar/', views.deletar_fornecedor, name='deletar_fornecedor'),  # Nova URL para deletar
+    path('home/', views.index, name='index'),
 ]

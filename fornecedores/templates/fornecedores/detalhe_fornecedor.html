@@ -3,28 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalhe do Fornecedor</title>
+    <title>Detalhes do Fornecedor</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+
+    </style>
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Detalhe do Fornecedor</h2>
+        <h2>Detalhes do Fornecedor</h2>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ fornecedor.nome }}</h5>
                 <p class="card-text"><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</p>
                 <p class="card-text"><strong>Telefone:</strong> {{ fornecedor.telefone }}</p>
                 <p class="card-text"><strong>Email:</strong> {{ fornecedor.email }}</p>
-                <p class="card-text"><strong>Endereço:</strong> {{ fornecedor.endereco }}</p>
+                <p class="card-text"><strong>Endereço:</strong> {{fornecedor.endereco }}</p>
+                <p class="card-text"><strong>Número:</strong> {{ fornecedor.numero }}</p>
                 <p class="card-text"><strong>Bairro:</strong> {{ fornecedor.bairro }}</p>
                 <p class="card-text"><strong>CEP:</strong> {{ fornecedor.cep }}</p>
                 <p class="card-text"><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
             </div>
-            <div class="card-footer">
-                <a href="{% url 'lista_fornecedores' %}" class="btn btn-secondary">Voltar para Lista de Fornecedores</a>
-                <a href="{% url 'deletar_fornecedor' fornecedor.pk %}" class="btn btn-danger float-right">Deletar Fornecedor</a>
-            </div>
         </div>
+        <a href="{% url 'lista_fornecedores' %}" class="btn btn-secondary mt-3">Voltar para Lista de Fornecedores</a>
     </div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
