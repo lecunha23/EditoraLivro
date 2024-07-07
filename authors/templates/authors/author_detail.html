@@ -1,19 +1,68 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhes do Autor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .author-details {
+            margin-bottom: 20px;
+        }
+        .author-info {
+            margin-bottom: 10px;
+        }
+        .action-links {
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ author.nome }} {{ author.sobrenome }}</h1>
-    <p>Data de Nascimento: {{ author.data_nascimento|date:"d/m/Y" }}</p>
-    <p>CPF: {{ author.cpf }}</p>
-    <!-- Link para voltar para a lista de autores -->
-    <a href="{% url 'author_list' %}">Voltar para a lista de autores</a>
-    <hr> <!-- linha divisória opcional para separar visualmente -->
-    <h1>Autores Criados</h1>
-    {% for autor in autores %}
-        <p>{{ autor.nome }} {{ autor.sobrenome }} (<a href="{% url 'author_update' autor.pk %}">Editar</a>) (<a href="{% url 'author_delete' autor.pk %}">Deletar</a>) <a href="{% url 'home' %}">Voltar para a página inicial</a></p>
-    {% endfor %}
+    <div class="container">
+        <h1 class="text-center">Detalhes do Autor</h1>
+        <div class="author-details">
+            <div class="author-info">
+                <h2>{{ author.nome }} {{ author.sobrenome }}</h2>
+                <p>Data de Nascimento: {{ author.data_nascimento|date:"d/m/Y" }}</p>
+                <p>CPF: {{ author.cpf }}</p>
+            </div>
+            <div class="action-links">
+                <a href="{% url 'author_list' %}" class="btn btn-secondary">Voltar para a lista de autores</a>
+            </div>
+        </div>
+        <hr>
+
+        {% for autor in autores %}
+            <div class="author-info">
+                <p>{{ autor.nome }} {{ autor.sobrenome }}</p>
+                <p>
+                    <a href="{% url 'author_update' autor.pk %}" class="btn btn-primary">Editar</a>
+                    <a href="{% url 'author_delete' autor.pk %}" class="btn btn-sm btn-danger">Deletar</a>
+                </p>
+            </div>
+        {% empty %}
+            <p>DesenvolvendoME</p>
+        {% endfor %}
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

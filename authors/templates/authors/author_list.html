@@ -1,17 +1,18 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Autores</title>
-    <!-- Adicione o link para o Bootstrap CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Autores</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f0f0f0;
-            margin: 0;
             padding: 20px;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -21,68 +22,36 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         h1 {
-            text-align: center;
             margin-bottom: 20px;
         }
-        .author-list {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 20px;
-        }
-        .author-list li {
+        .author-list-item {
             margin-bottom: 10px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-color: #f9f9f9;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .author-actions {
-            margin-top: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center; /* Alinha os itens verticalmente */
-        }
-        .author-info {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
-        }
-        .btn-secondary {
-            margin-left: auto;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Autores</h1>
-
-        <div class="author-actions">
+        <h1 class="text-center">Lista de Autores</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
             <a href="{% url 'author_create' %}" class="btn btn-success">Adicionar Autor</a>
             <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
         </div>
-
-        <ul class="author-list">
+        <ul class="list-group">
             {% for author in authors %}
-                <li class="author-info">
-                    <div>
-                        {{ author.nome }} {{ author.sobrenome }}
-                    </div>
-                    <div>
-                        <a href="{% url 'author_update' author.pk %}" class="btn btn-primary mr-2">Editar</a>
-                        <a href="{% url 'author_delete' author.pk %}" class="btn btn-danger">Deletar</a>
-                    </div>
+                <li class="list-group-item author-list-item">
+                    {{ author.nome }} {{ author.sobrenome }}
+                    <span class="float-right">
+                        <a href="{% url 'author_detail' author.pk %}" class="btn btn-sm btn-info">Detalhes</a>
+                        <a href="{% url 'author_update' author.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="{% url 'author_delete' author.pk %}" class="btn btn-sm btn-danger">Deletar</a>
+                    </span>
                 </li>
             {% empty %}
-                <li>Nenhum autor encontrado.</li>
+                <li class="list-group-item">Nenhum autor encontrado.</li>
             {% endfor %}
         </ul>
     </div>
 
-    <!-- Adicione o link para o Bootstrap JS e o jQuery (opcional) -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
