@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import LivroForm
-from .models import Livro
+from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from .models import Livro
@@ -31,9 +30,10 @@ def livro_list(request):
     livros = Livro.objects.all()
     return render(request, 'books/livro_list.html', {'livros': livros})
 
-def livro_detail(request, pk):
-    livro = get_object_or_404(Livro, pk=pk)
-    return render(request, 'books/livro_detail.html', {'livro': livro})
+class LivroDetailView(DetailView):
+    model = Livro
+    template_name = 'books/livro_detail.html'
+    context_object_name = 'livro'
 
 
 

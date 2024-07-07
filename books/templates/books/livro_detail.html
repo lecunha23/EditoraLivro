@@ -2,11 +2,11 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Lista de Livros</title>
+    <title>Detalhes do Livro</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Open Sans', sans-serif;
             background-color: #f0f0f0;
             margin: 0;
             padding: 20px;
@@ -22,70 +22,59 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 2rem;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .book-details {
+            margin-bottom: 20px;
         }
-        li {
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        .book-details label {
+            font-weight: bold;
+            width: 150px; /* Largura fixa para os labels */
+            display: inline-block; /* Para alinhar os labels à esquerda */
         }
-        .book-link {
-            text-decoration: none;
-            color: #007bff;
-        }
-        .book-link:hover {
-            text-decoration: underline;
-        }
-        .actions {
-            text-align: right;
+        .book-details p {
+            margin: 8px 0; /* Espaçamento interno entre os detalhes */
         }
         .button-group {
-            margin-bottom: 20px;
             display: flex;
             justify-content: space-between;
+            margin-top: 20px;
         }
         .button-group a {
             padding: 8px 12px;
-            background-color: #007bff;
-            color: #ffffff;
             border-radius: 4px;
             text-decoration: none;
+            font-weight: bold;
         }
-        .button-group a.btn-secondary {
-            background-color: #6c757d; /* Cor cinza do Bootstrap para botão secundário */
+        .btn-primary {
+            background-color: #007bff;
             color: #ffffff;
         }
-        .button-group a.btn-secondary:hover {
-            background-color: #5a6268; /* Cor de hover para botão secundário */
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            color: #ffffff;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Lista de Livros</h1>
-        <div class="button-group">
-            <a href="{% url 'livro_create' %}" class="btn btn-success">Adicionar Livro</a>
-            <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
+        <h1>Detalhes do Livro</h1>
+        <div class="book-details">
+            <p><label>Título:</label> {{ livro.titulo }}</p>
+            <p><label>Autor:</label> {{ livro.autor }}</p>
+            <p><label>Descrição:</label> {{ livro.descricao }}</p>
+            <p><label>Data de Publicação:</label> {{ livro.data_publicacao }}</p>
         </div>
-        <ul>
-            {% for livro in livros %}
-                <li>
-                    <a href="{% url 'livro_detail' livro.pk %}" class="book-link">
-                        {{ livro.titulo }}
-                    </a>
-                    <span class="actions">
-                        (<a href="{% url 'livro_update' livro.pk %}">Editar</a>)
-                        (<a href="{% url 'livro_delete' livro.pk %}">Deletar</a>)
-                    </span>
-                </li>
-            {% empty %}
-                <li>Nenhum livro encontrado.</li>
-            {% endfor %}
-        </ul>
+        <div class="button-group">
+            <a href="{% url 'livro_update' livro.pk %}" class="btn btn-primary">Editar</a>
+            <a href="{% url 'livro_list' %}" class="btn btn-secondary">Voltar para lista de livros</a>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

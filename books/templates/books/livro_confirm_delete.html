@@ -1,16 +1,71 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <title>Confirmar Exclusão</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .btn-confirm {
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+            background-color: #dc3545; /* Cor vermelha do Bootstrap para botão de exclusão */
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+        .btn-confirm:hover {
+            background-color: #c82333; /* Cor de hover para botão de exclusão */
+        }
+        .btn-cancel {
+            margin-top: 10px;
+            display: inline-block;
+            text-decoration: none;
+            background-color: #6c757d; /* Cor cinza do Bootstrap para botão secundário */
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268; /* Cor de hover para botão secundário */
+        }
+    </style>
 </head>
 <body>
-    <h1>Confirmar Exclusão</h1>
-    <p>Tem certeza que deseja excluir "{{ livro.titulo }}"?</p>
-    <form method="post">
-        {% csrf_token %}
-        <button type="submit">Confirmar</button>
-    </form>
-    <a href="{% url 'livro_list' %}">Cancelar</a>
+    <div class="container">
+        <h1>Confirmar Exclusão</h1>
+        <p>Tem certeza que deseja excluir "{{ livro.titulo }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <div class="text-center">
+                <button type="submit" class="btn btn-confirm">Confirmar</button>
+                <a href="{% url 'livro_list' %}" class="btn btn-cancel">Cancelar</a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
