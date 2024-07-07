@@ -6,19 +6,47 @@
     <title>Detalhes do Fornecedor</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto; /* Centraliza o container na página */
+            padding: 20px; /* Espaçamento interno do container */
+        }
+        .card {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .card-body {
+            padding: 20px;
+        }
+        .card-title {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .card-text {
+            margin-bottom: 5px;
+        }
+        .btn {
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Detalhes do Fornecedor</h2>
+    <div class="container">
+        <h2 class="text-center">Informação do Fornecedor</h2>
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">{{ fornecedor.nome }}</h5>
                 <p class="card-text"><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</p>
                 <p class="card-text"><strong>Telefone:</strong> {{ fornecedor.telefone }}</p>
                 <p class="card-text"><strong>Email:</strong> {{ fornecedor.email }}</p>
-                <p class="card-text"><strong>Endereço:</strong> {{fornecedor.endereco }}</p>
+                <p class="card-text"><strong>Endereço:</strong> {{ fornecedor.endereco }}</p>
                 <p class="card-text"><strong>Número:</strong> {{ fornecedor.numero }}</p>
                 <p class="card-text"><strong>Bairro:</strong> {{ fornecedor.bairro }}</p>
                 <p class="card-text"><strong>CEP:</strong> {{ fornecedor.cep }}</p>

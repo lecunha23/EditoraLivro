@@ -41,7 +41,7 @@
                 <li class="list-group-item author-list-item">
                     {{ author.nome }} {{ author.sobrenome }}
                     <span class="float-right">
-                        <a href="{% url 'author_detail' author.pk %}" class="btn btn-sm btn-info">Detalhes</a>
+                        <a href="{% url 'author_detail' author.pk %}" class="btn btn-sm btn-info">Informação</a>
                         <a href="{% url 'author_update' author.pk %}" class="btn btn-sm btn-primary">Editar</a>
                         <a href="{% url 'author_delete' author.pk %}" class="btn btn-sm btn-danger">Deletar</a>
                     </span>
