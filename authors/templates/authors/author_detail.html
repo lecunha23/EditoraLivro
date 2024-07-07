@@ -1,3 +1,4 @@
+<!-- templates/authors/author_detail.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -44,22 +45,25 @@
             </div>
             <div class="action-links">
                 <a href="{% url 'author_list' %}" class="btn btn-secondary">Voltar para a lista de autores</a>
+                <a href="{% url 'author_update' author.pk %}" class="btn btn-primary">Editar</a>
+                <a href="{% url 'author_delete' author.pk %}" class="btn btn-danger">Deletar</a>
             </div>
         </div>
         <hr>
-
-        {% for autor in autores %}
-            <div class="author-info">
-                <p>{{ autor.nome }} {{ autor.sobrenome }}</p>
-                <p>
-                    <a href="{% url 'author_update' autor.pk %}" class="btn btn-primary">Editar</a>
-                    <a href="{% url 'author_delete' autor.pk %}" class="btn btn-sm btn-danger">Deletar</a>
-                </p>
-            </div>
-        {% empty %}
-            <p>DesenvolvendoME</p>
-        {% endfor %}
-
+        <!-- Verificação de autores disponíveis -->
+        {% if authors %}
+            {% for autor in authors %}
+                <div class="author-info">
+                    <p>{{ autor.nome }} {{ autor.sobrenome }}</p>
+                    <p>
+                        <a href="{% url 'author_update' autor.pk %}" class="btn btn-primary">Editar</a>
+                        <a href="{% url 'author_delete' autor.pk %}" class="btn btn-sm btn-danger">Deletar</a>
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Não há outros autores cadastrados.</p>
+        {% endif %}
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
