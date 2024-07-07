@@ -9,5 +9,6 @@ class Livro(models.Model):
     data_publicacao = models.DateField()
 
 
+
     def __str__(self):
         return self.titulo
