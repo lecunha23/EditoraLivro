@@ -22,6 +22,15 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .card-header {
+            text-align: center;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #dee2e6;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            padding: 10px;
+            font-size: 1.5rem;
+        }
         .card-body {
             padding: 20px;
         }
@@ -35,26 +44,61 @@
         .btn {
             margin-top: 10px;
         }
+        .image-preview {
+            margin-top: 20px;
+            text-align: center;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+        .image-preview img {
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            padding: 5px;
+        }
+        .action-links a {
+            margin-right: 1px; /* Ajuste o espaçamento entre os botões aqui */
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2 class="text-center">Informação do Fornecedor</h2>
         <div class="card">
+            <div class="card-header">
+                Informação do Fornecedor
+            </div>
             <div class="card-body">
                 <h5 class="card-title">{{ fornecedor.nome }}</h5>
                 <p class="card-text"><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</p>
                 <p class="card-text"><strong>Telefone:</strong> {{ fornecedor.telefone }}</p>
                 <p class="card-text"><strong>Email:</strong> {{ fornecedor.email }}</p>
-                <p class="card-text"><strong>Endereço:</strong> {{ fornecedor.endereco }}</p>
+                <p class="card-text"><strong>Endereço:</strong> {{fornecedor.endereco }}</p>
                 <p class="card-text"><strong>Número:</strong> {{ fornecedor.numero }}</p>
                 <p class="card-text"><strong>Bairro:</strong> {{ fornecedor.bairro }}</p>
                 <p class="card-text"><strong>CEP:</strong> {{ fornecedor.cep }}</p>
                 <p class="card-text"><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
+
+                <div class="mt-3 action-links">
+                    <a href="{% url 'editar_fornecedor' fornecedor.pk %}" class="btn btn-primary">Editar</a>
+                    <form action="{% url 'deletar_fornecedor' fornecedor.pk %}" method="post" style="display: inline-block;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Deletar</button>
+                    </form>
+                    <a href="{% url 'lista_fornecedores' %}" class="btn btn-secondary">Voltar para Lista de Fornecedores</a>
+                </div>
+
+                <div class="image-preview">
+                    {% if not fornecedor.imagem %}
+                        <img src="/static/imagens/DesenvolvendoMe.JPG" alt="Imagem de Exemplo">
+                    {% else %}
+                        <img src="{{ fornecedor.imagem.url }}" alt="{{ fornecedor.nome }}">
+                    {% endif %}
+                </div>
             </div>
         </div>
-        <a href="{% url 'lista_fornecedores' %}" class="btn btn-secondary mt-3">Voltar para Lista de Fornecedores</a>
     </div>
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

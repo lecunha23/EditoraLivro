@@ -118,5 +118,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 # Configuração do formato de data
 DATE_FORMAT = 'd/m/Y'
+
