@@ -1,21 +1,31 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalhe do Fornecedor</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <h1>Detalhe do Fornecedor</h1>
-    <p><strong>Nome:</strong> {{ fornecedor.nome }}</p>
-    <p><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</p>
-    <p><strong>Telefone:</strong> {{ fornecedor.telefone }}</p>
-    <p><strong>Email:</strong> {{ fornecedor.email }}</p>
-    <p><strong>Endereço:</strong> {{fornecedor.endereco }}</p>
-    <p><strong>Bairro:</strong> {{ fornecedor.bairro }}</p>
-    <p><strong>CEP:</strong> {{ fornecedor.cep }}</p>
-    <p><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
-    <a href="{% url 'lista_fornecedores' %}">Voltar para a Lista</a>
+    <div class="container mt-5">
+        <h2>Detalhe do Fornecedor</h2>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">{{ fornecedor.nome }}</h5>
+                <p class="card-text"><strong>CNPJ:</strong> {{ fornecedor.cnpj }}</p>
+                <p class="card-text"><strong>Telefone:</strong> {{ fornecedor.telefone }}</p>
+                <p class="card-text"><strong>Email:</strong> {{ fornecedor.email }}</p>
+                <p class="card-text"><strong>Endereço:</strong> {{ fornecedor.endereco }}</p>
+                <p class="card-text"><strong>Bairro:</strong> {{ fornecedor.bairro }}</p>
+                <p class="card-text"><strong>CEP:</strong> {{ fornecedor.cep }}</p>
+                <p class="card-text"><strong>Cidade:</strong> {{ fornecedor.cidade }}</p>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'lista_fornecedores' %}" class="btn btn-secondary">Voltar para Lista de Fornecedores</a>
+                <a href="{% url 'deletar_fornecedor' fornecedor.pk %}" class="btn btn-danger float-right">Deletar Fornecedor</a>
+            </div>
+        </div>
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
