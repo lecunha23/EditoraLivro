@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adicionar/Editar Livro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-row {
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{% if form.instance.pk %}Editar Livro{% else %}Adicionar Livro{% endif %}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_titulo">Título</label>
+                    <input type="text" class="form-control" id="id_titulo" name="titulo" value="{{ form.titulo.value }}" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="id_autor">Autor</label>
+                    <input type="text" class="form-control" id="id_autor" name="autor" value="{{ form.autor.value }}" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label for="id_descricao">Descrição</label>
+                    <textarea class="form-control" id="id_descricao" name="descricao" rows="4" required>{{ form.descricao.value }}</textarea>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="id_data_publicacao">Data de Publicação</label>
+                    <input type="date" class="form-control" id="id_data_publicacao" name="data_publicacao" value="{{ form.data_publicacao.value }}" required>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+            <a href="{% url 'livro_list' %}" class="btn btn-secondary">Voltar para lista de Livros</a>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

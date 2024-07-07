@@ -33,7 +33,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authors',  # Seu aplicativo personalizado
+    'authors',
+    'books',
+    'fornecedores',
 ]
 
 MIDDLEWARE = [
@@ -51,7 +53,7 @@ ROOT_URLCONF = 'EditoraLivro.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,5 +118,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
 # Configuração do formato de data
 DATE_FORMAT = 'd/m/Y'
+

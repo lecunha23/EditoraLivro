@@ -1,22 +1,58 @@
 <!DOCTYPE html>
-<html lang="br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Autores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .author-list-item {
+            margin-bottom: 10px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Autores</h1>
-    <a href="{% url 'author_create' %}">Adicionar Autor</a>
-    <ul>
-        {% for author in authors %}
-            <li>
-                <a href="{% url 'author_detail' author.pk %}">
+    <div class="container">
+        <h1 class="text-center">Lista de Autores</h1>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <a href="{% url 'author_create' %}" class="btn btn-success">Adicionar Autor</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Voltar para a página inicial</a>
+        </div>
+        <ul class="list-group">
+            {% for author in authors %}
+                <li class="list-group-item author-list-item">
                     {{ author.nome }} {{ author.sobrenome }}
-                </a>
-                (<a href="{% url 'author_update' author.pk %}">Editar</a>)
-                (<a href="{% url 'author_delete' author.pk %}">Deletar</a>)
-            </li>
-        {% endfor %}
-    </ul>
+                    <span class="float-right">
+                        <a href="{% url 'author_detail' author.pk %}" class="btn btn-sm btn-info">Informação</a>
+                        <a href="{% url 'author_update' author.pk %}" class="btn btn-sm btn-primary">Editar</a>
+                        <a href="{% url 'author_delete' author.pk %}" class="btn btn-sm btn-danger">Deletar</a>
+                    </span>
+                </li>
+            {% empty %}
+                <li class="list-group-item">Nenhum autor encontrado.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
