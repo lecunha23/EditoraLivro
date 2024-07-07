@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 
 class Fornecedor(models.Model):
     nome = models.CharField(max_length=255)
-    cnpj = models.CharField(max_length=18, unique=True)
+    cnpj = models.CharField(max_length=14, unique=True)
     telefone = models.CharField(max_length=20)
     email = models.EmailField()
     endereco = models.TextField()
