@@ -38,6 +38,7 @@ def author_update(request, pk):
         form = AuthorForm(instance=author)
     return render(request, 'authors/author_form.html', {'form': form})
 
+
 def author_delete(request, pk):
     author = get_object_or_404(Author, pk=pk)
     if request.method == 'POST':
