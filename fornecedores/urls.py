@@ -11,3 +11,4 @@ urlpatterns = [
     path('<int:pk>/deletar/', views.deletar_fornecedor, name='deletar_fornecedor'),  # Nova URL para deletar
     path('home/', views.index, name='index'),
 ]
+fqq
