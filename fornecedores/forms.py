@@ -23,3 +23,9 @@ class FornecedorForm(forms.ModelForm):
             raise forms.ValidationError('CNPJ inválido.')
 
         return cnpj
+
+    def is_valid(self):
+        valid = super(FornecedorForm, self).is_valid()
+        print("Formulário válido:", valid)
+        print("Erros do formulário:", self.errors)
+        return valid

@@ -1,12 +1,10 @@
-# fornecedores/utils.py
 
+from validate_docbr import CNPJ
 import re
 
 def validar_cnpj(cnpj):
-    cnpj = re.sub(r'\D', '', cnpj)  # Remove todos os caracteres não numéricos
-
-    if len(cnpj) != 14:
-        return False
+    cnpj_validator = CNPJ()
+    return cnpj_validator.validate(cnpj)
 
     def calcular_digito(cnpj, peso):
         soma = 0
