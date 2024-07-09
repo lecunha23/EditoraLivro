@@ -55,7 +55,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="id_data_publicacao">Data de Publicação</label>
-                    <input type="date" class="form-control" id="id_data_publicacao" name="data_publicacao" value="{{ form.data_publicacao.value }}" required>
+                    <input type="date" class="form-control" id="id_data_publicacao" name="data_publicacao" value="{{ form.data_publicacao.value }}" required style="width: 60%;">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="id_isbn">ISBN</label>
+                    <input type="text" class="form-control" id="id_isbn" name="isbn" value="" required>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Salvar</button>

@@ -3,6 +3,7 @@ from django import forms
 from .models import Livro
 from django.forms.widgets import DateInput
 
+
 class LivroForm(forms.ModelForm):
     class Meta:
         model = Livro
@@ -10,6 +11,7 @@ class LivroForm(forms.ModelForm):
         widgets = {
             'data_publicacao': DateInput(attrs={'type': 'date'}),  # Configuração para mostrar calendário
         }
+
 
     def clean_isbn(self):
         isbn = self.cleaned_data.get('isbn')
