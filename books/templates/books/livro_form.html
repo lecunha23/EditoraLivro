@@ -29,6 +29,11 @@
         .form-group {
             margin-bottom: 15px;
         }
+        .errorlist {
+            color: red;
+            list-style-type: none;
+            padding-left: 0;
+        }
     </style>
 </head>
 <body>
@@ -36,6 +41,20 @@
         <h1>{% if form.instance.pk %}Editar Livro{% else %}Adicionar Livro{% endif %}</h1>
         <form method="post">
             {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <ul class="errorlist">
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="id_titulo">Título</label>
@@ -43,19 +62,23 @@
                 </div>
                 <div class="form-group col-md-6">
                     <label for="id_autor">Autor</label>
-                    <input type="text" class="form-control" id="id_autor" name="autor" value="" required>
+                    <select class="form-control" id="id_autor" name="autor">
+                        {% for autor in form.fields.autor.queryset %}
+                            <option value="{{ autor.pk }}" {% if form.autor.value == autor.pk %}selected{% endif %}>{{ autor }}</option>
+                        {% endfor %}
+                    </select>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label for="id_descricao">Descrição</label>
-                    <textarea class="form-control" id="id_descricao" name="descricao" rows="4" required>{{ form.descricao.value }}</textarea>
+                    <textarea class="form-control" id="id_descricao" name="descricao" rows="4" required></textarea>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="id_data_publicacao">Data de Publicação</label>
-                    <input type="date" class="form-control" id="id_data_publicacao" name="data_publicacao" value="{{ form.data_publicacao.value }}" required style="width: 60%;">
+                    <input type="date" class="form-control" id="id_data_publicacao" name="data_publicacao" value="" required>
                 </div>
                 <div class="form-group col-md-6">
                     <label for="id_isbn">ISBN</label>

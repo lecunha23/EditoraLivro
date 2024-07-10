@@ -3,14 +3,24 @@ from django import forms
 from .models import Livro
 from django.forms.widgets import DateInput
 
+from django import forms
+from .models import Livro
+from authors.models import Author
 
 class LivroForm(forms.ModelForm):
     class Meta:
         model = Livro
-        fields = '__all__'
+        fields = ['titulo', 'autor', 'descricao', 'data_publicacao', 'isbn']
         widgets = {
-            'data_publicacao': DateInput(attrs={'type': 'date'}),  # Configuração para mostrar calendário
+            'data_publicacao': forms.DateInput(attrs={'type': 'date'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['autor'].queryset = Author.objects.all()
+        self.fields['autor'].label_from_instance = lambda obj: f"{obj.nome} {obj.sobrenome}"
+
+
 
 
     def clean_isbn(self):

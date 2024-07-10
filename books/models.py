@@ -8,5 +8,6 @@ class Livro(models.Model):
     autor = models.ForeignKey(Author, on_delete=models.CASCADE)
     isbn = models.CharField(max_length=13, validators=[validar_isbn])
     data_publicacao = models.DateField()
+    descricao = models.TextField()
     def __str__(self):
         return self.titulo
