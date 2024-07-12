@@ -13,6 +13,6 @@ urlpatterns = [
     path('', views.pagina_inicial, name='pagina_inicial'),
     path('fornecedores/', include('fornecedores.urls')),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
-
+    path('', include('pecas.urls')),
 
 ]

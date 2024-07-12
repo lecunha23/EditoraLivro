@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Peças</title>
+</head>
+<body>
+    <h2>Lista de Peças</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Fornecedor</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for peca in pecas %}
+            <tr>
+                <td>{{ peca.nome }}</td>
+                <td>{{ peca.fornecedor.nome }}</td>
+                <td>
+                    <a href="{% url 'editar_peca' peca.pk %}">Editar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'criar_peca' %}">Adicionar Peça</a>
+</body>
+</html>
