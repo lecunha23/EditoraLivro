@@ -1,33 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Peças</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px; /* Ajuste conforme necessário */
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h2 {
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            font-size: 24px; /* Tamanho do título */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        table th {
+            background-color: #007bff; /* Cor de fundo do cabeçalho */
+            color: white; /* Cor do texto do cabeçalho */
+            font-weight: bold;
+        }
+        table td a {
+            display: inline-block;
+            margin-right: 8px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        table td a:hover {
+            text-decoration: underline;
+        }
+        .acoes {
+            white-space: nowrap; /* Evita que o texto seja quebrado */
+        }
+        .acoes a {
+            margin-right: 8px;
+        }
+        .acoes a:last-child {
+            margin-right: 0;
+        }
+        .adicionar-link {
+            display: block;
+            margin-top: 20px;
+            text-align: right;
+        }
+        .adicionar-link a {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .adicionar-link a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h2>Lista de Peças</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Fornecedor</th>
-                <th>Valor</th>
-                <th>Ações</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for peca in pecas %}
-            <tr>
-                <td>{{ peca.nome }}</td>
-                <td>{{ peca.fornecedor.nome }}</td>
-                <td>{{ peca.valor }}</td>
-
-                <td>
-                    <a href="{% url 'editar_peca' peca.pk %}">Editar</a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'criar_peca' %}">Adicionar Peça</a>
+    <div class="container">
+        <h2>Lista de Peças</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Fornecedor</th>
+                    <th>Valor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for peca in pecas %}
+                <tr>
+                    <td>{{ peca.nome }}</td>
+                    <td>{{ peca.fornecedor.nome }}</td>
+                    <td>R$ {{ peca.valor }}</td>
+                    <td class="acoes">
+                        <a href="{% url 'editar_peca' peca.pk %}">Editar</a>
+                        <a href="{% url 'deletar_peca' peca.pk %}" style="color: #dc3545;">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="adicionar-link">
+            <a href="{% url 'criar_peca' %}">Adicionar Peça</a>
+        </div>
+    </div>
 </body>
 </html>
