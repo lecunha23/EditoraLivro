@@ -4,4 +4,4 @@ from .models import Peca
 class PecaForm(forms.ModelForm):
     class Meta:
         model = Peca
-        fields = ['nome', 'descricao', 'fornecedor']
+        fields = ['nome', 'descricao', 'fornecedor', 'valor']
