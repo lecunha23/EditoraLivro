@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from .models import Peca
 from .forms import PecaForm
+from django.shortcuts import get_object_or_404, redirect, render
+
 
 def listar_pecas(request):
     pecas = Peca.objects.all()
@@ -26,3 +28,10 @@ def editar_peca(request, pk):
     else:
         form = PecaForm(instance=peca)
     return render(request, 'pecas/editar_peca.html', {'form': form})
+
+def deletar_peca(request, pk):
+    peca = get_object_or_404(Peca, pk=pk)
+    if request.method == 'POST':
+        peca.delete()
+        return redirect('listar_pecas')  # Redirecionar para a página de listagem de peças após a exclusão
+    return render(request, 'pecas/deletar_peca.html', {'peca': peca})
