@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import logging
+logging.disable(logging.DEBUG)
 import os
 from pathlib import Path
 
@@ -36,6 +37,7 @@ INSTALLED_APPS = [
     'authors',
     'books',
     'fornecedores',
+    'pecas',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,19 @@ STATICFILES_DIRS = [
 # Configuração do formato de data
 DATE_FORMAT = 'd/m/Y'
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
